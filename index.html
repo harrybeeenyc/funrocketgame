@@ -152,17 +152,29 @@
     transform: scale(0.93);
   }
 
-  #launch-btn {
+  /* Bottom button bar */
+  #btn-bar {
     position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 20px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 15;
+  }
+
+  #launch-btn {
+    flex: 1 1 auto;
+    max-width: 220px;
     background: linear-gradient(180deg, #ff5555, #cc2222);
     color: #fff;
     border: 4px solid #ff8888;
     box-shadow: 0 6px 0 #881111, 0 8px 20px rgba(0,0,0,0.5);
-    z-index: 15;
     animation: pulse 1.5s ease-in-out infinite;
+    padding: 14px 10px;
+    font-size: 22px;
   }
 
   @keyframes pulse {
@@ -171,30 +183,44 @@
   }
 
   #shop-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 16px;
+    flex: 0 0 auto;
     background: linear-gradient(180deg, #55aaff, #2266cc);
     color: #fff;
     border: 3px solid #88ccff;
     box-shadow: 0 4px 0 #114488;
-    z-index: 15;
-    padding: 12px 20px;
-    font-size: 18px;
+    padding: 12px 18px;
+    font-size: 16px;
   }
 
   #rocket-shop-btn {
-    position: fixed;
-    bottom: 30px;
-    left: 16px;
+    flex: 0 0 auto;
     background: linear-gradient(180deg, #ff8844, #cc4422);
     color: #fff;
     border: 3px solid #ffaa66;
     box-shadow: 0 4px 0 #883311;
-    z-index: 15;
-    padding: 12px 18px;
-    font-size: 16px;
+    padding: 12px 14px;
+    font-size: 14px;
     display: none;
+  }
+
+  /* Cheat code button */
+  #cheat-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(30,30,60,0.7);
+    border: 2px solid #555;
+    color: #888;
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    cursor: pointer;
+    z-index: 15;
+    display: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   #rocket-shop {
@@ -548,14 +574,18 @@
 
 <div id="proto-badge" style="display:none;"></div>
 
-<!-- LAUNCH BUTTON -->
-<button id="launch-btn" class="game-btn" style="display:none;">LAUNCH!</button>
+<!-- BOTTOM BUTTON BAR -->
+<div id="btn-bar" style="display:none;">
+  <button id="rocket-shop-btn" class="game-btn">🚀 ROCKETS</button>
+  <button id="launch-btn" class="game-btn">LAUNCH!</button>
+  <button id="shop-btn" class="game-btn">SHOP</button>
+</div>
+
+<!-- CHEAT CODE BUTTON (mobile) -->
+<button id="cheat-btn" title="Enter code">?</button>
 
 <!-- FLY TO MOON BUTTON -->
 <button id="moon-btn" class="game-btn">🌙 FLY TO MOON</button>
-
-<!-- ROCKET SHOP BUTTON -->
-<button id="rocket-shop-btn" class="game-btn">🚀 ROCKETS</button>
 
 <!-- ROCKET SHOP PANEL -->
 <div id="rocket-shop">
@@ -572,9 +602,6 @@
 
 <!-- MARS TRANSITION -->
 <div id="mars-transition" style="position:fixed;inset:0;background:radial-gradient(circle,#661100,#000);display:none;align-items:center;justify-content:center;z-index:100;color:#ffaa66;font-family:'Fredoka One',cursive;font-size:42px;text-align:center;text-shadow:0 0 20px #ff4400;"><div>🚀<br>APPROACHING MARS…</div></div>
-
-<!-- SHOP BUTTON -->
-<button id="shop-btn" class="game-btn" style="display:none;">SHOP</button>
 
 <!-- POWER BAR -->
 <div id="power-label" style="display:none;">HOLD TO CHARGE!</div>
@@ -614,6 +641,12 @@
 </div>
 
 <script>
+// ============ HELPERS ============
+const btnBar = document.getElementById('btn-bar');
+const cheatBtn = document.getElementById('cheat-btn');
+function showBtnBar() { btnBar.style.display = 'flex'; cheatBtn.style.display = 'block'; }
+function hideBtnBar() { btnBar.style.display = 'none'; cheatBtn.style.display = 'none'; }
+
 // ============ GAME STATE ============
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
@@ -1297,11 +1330,9 @@ function startCharge() {
   charging = true;
   document.getElementById('power-bar-container').style.display = 'block';
   document.getElementById('power-label').style.display = 'block';
-  document.getElementById('launch-btn').style.display = 'none';
-  document.getElementById('shop-btn').style.display = 'none';
+  hideBtnBar();
   document.getElementById('moon-btn').style.display = 'none';
   document.getElementById('mars-btn').style.display = 'none';
-  document.getElementById('rocket-shop-btn').style.display = 'none';
 }
 
 function releaseCharge() {
@@ -1786,9 +1817,7 @@ function flyToMoon() {
   if (currentLevel !== 1) return;
   document.getElementById('moon-btn').style.display = 'none';
   document.getElementById('mars-btn').style.display = 'none';
-  document.getElementById('launch-btn').style.display = 'none';
-  document.getElementById('shop-btn').style.display = 'none';
-  document.getElementById('rocket-shop-btn').style.display = 'none';
+  hideBtnBar();
   const overlay = document.getElementById('moon-transition');
   overlay.style.display = 'flex';
   setTimeout(() => {
@@ -1796,9 +1825,7 @@ function flyToMoon() {
     saveGame();
     overlay.style.display = 'none';
     phase = 'idle';
-    document.getElementById('launch-btn').style.display = 'block';
-    document.getElementById('shop-btn').style.display = 'block';
-    document.getElementById('rocket-shop-btn').style.display = 'block';
+    showBtnBar();
     document.getElementById('hud').style.display = 'flex';
     updateCoinDisplay();
     checkSkinUnlocks(); // unlocks lava rocket
@@ -1815,9 +1842,7 @@ function refreshMarsButton() {
 function flyToMars() {
   if (currentLevel !== 2) return;
   document.getElementById('mars-btn').style.display = 'none';
-  document.getElementById('launch-btn').style.display = 'none';
-  document.getElementById('shop-btn').style.display = 'none';
-  document.getElementById('rocket-shop-btn').style.display = 'none';
+  hideBtnBar();
   const overlay = document.getElementById('mars-transition');
   overlay.style.display = 'flex';
   setTimeout(() => {
@@ -1825,9 +1850,7 @@ function flyToMars() {
     saveGame();
     overlay.style.display = 'none';
     phase = 'idle';
-    document.getElementById('launch-btn').style.display = 'block';
-    document.getElementById('shop-btn').style.display = 'block';
-    document.getElementById('rocket-shop-btn').style.display = 'block';
+    showBtnBar();
     document.getElementById('hud').style.display = 'flex';
     updateCoinDisplay();
     checkSkinUnlocks();
@@ -1840,9 +1863,7 @@ function flyToMars() {
 document.getElementById('play-btn').addEventListener('click', () => {
   document.getElementById('title-screen').style.display = 'none';
   phase = 'idle';
-  document.getElementById('launch-btn').style.display = 'block';
-  document.getElementById('shop-btn').style.display = 'block';
-  document.getElementById('rocket-shop-btn').style.display = 'block';
+  showBtnBar();
   document.getElementById('hud').style.display = 'flex';
   updateCoinDisplay();
   refreshMoonButton();
@@ -1858,17 +1879,13 @@ document.getElementById('mars-btn').addEventListener('click', flyToMars);
 document.getElementById('rocket-shop-btn').addEventListener('click', () => {
   renderRocketShop();
   document.getElementById('rocket-shop').style.display = 'block';
-  document.getElementById('launch-btn').style.display = 'none';
-  document.getElementById('shop-btn').style.display = 'none';
-  document.getElementById('rocket-shop-btn').style.display = 'none';
+  hideBtnBar();
   document.getElementById('moon-btn').style.display = 'none';
   document.getElementById('mars-btn').style.display = 'none';
 });
 document.getElementById('close-rocket-shop').addEventListener('click', () => {
   document.getElementById('rocket-shop').style.display = 'none';
-  document.getElementById('launch-btn').style.display = 'block';
-  document.getElementById('shop-btn').style.display = 'block';
-  document.getElementById('rocket-shop-btn').style.display = 'block';
+  showBtnBar();
   refreshMoonButton();
   refreshMarsButton();
 });
@@ -1911,6 +1928,31 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+// Mobile cheat code button
+function applyCheat(code) {
+  if (code === '4321') {
+    upgradeData.forEach(ud => { if (upgrades[ud.key] < 20) upgrades[ud.key] = 20; });
+    coins += 2000;
+    saveGame(); updateCoinDisplay(); refreshMoonButton(); refreshMarsButton();
+    if (document.getElementById('shop').style.display === 'block') renderShop();
+    flashBadge('🔥 ALL UPGRADES → LV 20 🔥');
+    return true;
+  }
+  if (code === '123') {
+    upgradeData.forEach(ud => { if (upgrades[ud.key] < 10) upgrades[ud.key] = 10; });
+    coins += 500;
+    saveGame(); updateCoinDisplay(); refreshMoonButton(); refreshMarsButton();
+    if (document.getElementById('shop').style.display === 'block') renderShop();
+    flashBadge('✨ ALL UPGRADES → LV 10 ✨');
+    return true;
+  }
+  return false;
+}
+document.getElementById('cheat-btn').addEventListener('click', () => {
+  const code = prompt('Enter code:');
+  if (code && code.trim()) applyCheat(code.trim());
+});
+
 // Launch button — start charging
 document.getElementById('launch-btn').addEventListener('mousedown', startCharge);
 document.getElementById('launch-btn').addEventListener('touchstart', (e) => { e.preventDefault(); startCharge(); });
@@ -1923,18 +1965,14 @@ window.addEventListener('touchend', () => { if (phase === 'charging') releaseCha
 document.getElementById('shop-btn').addEventListener('click', () => {
   renderShop();
   document.getElementById('shop').style.display = 'block';
-  document.getElementById('launch-btn').style.display = 'none';
-  document.getElementById('shop-btn').style.display = 'none';
+  hideBtnBar();
   document.getElementById('moon-btn').style.display = 'none';
   document.getElementById('mars-btn').style.display = 'none';
-  document.getElementById('rocket-shop-btn').style.display = 'none';
 });
 
 document.getElementById('close-shop').addEventListener('click', () => {
   document.getElementById('shop').style.display = 'none';
-  document.getElementById('launch-btn').style.display = 'block';
-  document.getElementById('shop-btn').style.display = 'block';
-  document.getElementById('rocket-shop-btn').style.display = 'block';
+  showBtnBar();
   refreshMoonButton();
   refreshMarsButton();
 });
@@ -1961,9 +1999,7 @@ document.getElementById('ok-btn').addEventListener('click', () => {
   document.getElementById('results').style.display = 'none';
   phase = 'idle';
   particles = [];
-  document.getElementById('launch-btn').style.display = 'block';
-  document.getElementById('shop-btn').style.display = 'block';
-  document.getElementById('rocket-shop-btn').style.display = 'block';
+  showBtnBar();
   document.getElementById('hud').style.display = 'flex';
   updateCoinDisplay();
   refreshMoonButton();
