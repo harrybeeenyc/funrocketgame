@@ -183,6 +183,163 @@
     font-size: 18px;
   }
 
+  #rocket-shop-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 16px;
+    background: linear-gradient(180deg, #ff8844, #cc4422);
+    color: #fff;
+    border: 3px solid #ffaa66;
+    box-shadow: 0 4px 0 #883311;
+    z-index: 15;
+    padding: 12px 18px;
+    font-size: 16px;
+    display: none;
+  }
+
+  #rocket-shop {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(20,20,50,0.95), rgba(10,10,30,0.98));
+    border-top: 4px solid #ff8844;
+    border-radius: 20px 20px 0 0;
+    padding: 16px 12px 24px;
+    z-index: 21;
+    display: none;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  #rocket-shop h2 {
+    font-family: 'Fredoka One', cursive;
+    color: #ff8844;
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0 #000;
+  }
+  #close-rocket-shop {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: #ff4444;
+    color: #fff;
+    border: 2px solid #ff8888;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .rocket-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .rocket-card {
+    background: linear-gradient(135deg, #2a2a5a, #1e1e4a);
+    border: 3px solid #444;
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+  }
+  .rocket-card.unlocked { border-color: #ff8844; }
+  .rocket-card.equipped { border-color: #ffd700; box-shadow: 0 0 15px rgba(255,215,0,0.4); }
+  .rocket-card.locked { opacity: 0.55; }
+  .rocket-card canvas { background: #11112a; border-radius: 8px; }
+  .rocket-card .info { flex: 1; }
+  .rocket-card .name { font-size: 16px; font-weight: 900; }
+  .rocket-card .desc { font-size: 12px; color: #aabbff; margin-top: 2px; }
+  .rocket-card .unlock-text { font-size: 11px; color: #ff8888; margin-top: 4px; }
+  .rocket-card button {
+    background: #ffd700;
+    color: #1a1a3a;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .rocket-card button.equipped-btn { background: #44dd44; color: #fff; }
+  .rocket-card button:disabled { background: #555; color: #999; cursor: not-allowed; }
+
+  #moon-btn, #mars-btn {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #1a1a3a;
+    border: 4px solid #ffffff;
+    z-index: 16;
+    display: none;
+    font-size: 22px;
+    padding: 14px 28px;
+  }
+  #moon-btn {
+    background: linear-gradient(180deg, #cccccc, #888899);
+    box-shadow: 0 6px 0 #555566, 0 0 30px rgba(200,200,255,0.7);
+    animation: moonpulse 1.2s ease-in-out infinite;
+  }
+  #mars-btn {
+    background: linear-gradient(180deg, #ff7755, #cc2200);
+    color: #fff;
+    box-shadow: 0 6px 0 #661100, 0 0 30px rgba(255,80,40,0.8);
+    animation: marspulse 1.2s ease-in-out infinite;
+  }
+  @keyframes marspulse {
+    0%, 100% { box-shadow: 0 6px 0 #661100, 0 0 30px rgba(255,80,40,0.8); }
+    50% { box-shadow: 0 6px 0 #661100, 0 0 50px rgba(255,150,60,0.95); }
+  }
+
+  @keyframes moonpulse {
+    0%, 100% { box-shadow: 0 6px 0 #555566, 0 0 30px rgba(200,200,255,0.7); }
+    50% { box-shadow: 0 6px 0 #555566, 0 0 50px rgba(255,255,255,0.95); }
+  }
+
+  #proto-badge {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 80, 200, 0.85);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    z-index: 100;
+    letter-spacing: 1px;
+  }
+
+  /* MOON TRANSITION OVERLAY */
+  #moon-transition {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #fff 0%, #aabbff 30%, #000 100%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+    flex-direction: column;
+  }
+  #moon-transition .moon-text {
+    font-family: 'Fredoka One', cursive;
+    color: #fff;
+    font-size: 38px;
+    text-shadow: 0 0 20px #88aaff, 3px 3px 0 #000;
+    text-align: center;
+    padding: 20px;
+  }
+
   #close-shop {
     position: absolute;
     top: 10px;
@@ -389,8 +546,32 @@
   <div class="hud-box" id="height-display">0 m</div>
 </div>
 
+<div id="proto-badge" style="display:none;"></div>
+
 <!-- LAUNCH BUTTON -->
 <button id="launch-btn" class="game-btn" style="display:none;">LAUNCH!</button>
+
+<!-- FLY TO MOON BUTTON -->
+<button id="moon-btn" class="game-btn">🌙 FLY TO MOON</button>
+
+<!-- ROCKET SHOP BUTTON -->
+<button id="rocket-shop-btn" class="game-btn">🚀 ROCKETS</button>
+
+<!-- ROCKET SHOP PANEL -->
+<div id="rocket-shop">
+  <button id="close-rocket-shop">&times;</button>
+  <h2>ROCKET HANGAR</h2>
+  <div class="rocket-grid" id="rocket-grid"></div>
+</div>
+
+<!-- MOON TRANSITION -->
+<div id="moon-transition"><div class="moon-text">🚀<br>APPROACHING THE MOON…</div></div>
+
+<!-- FLY TO MARS BUTTON -->
+<button id="mars-btn" class="game-btn">🔴 FLY TO MARS</button>
+
+<!-- MARS TRANSITION -->
+<div id="mars-transition" style="position:fixed;inset:0;background:radial-gradient(circle,#661100,#000);display:none;align-items:center;justify-content:center;z-index:100;color:#ffaa66;font-family:'Fredoka One',cursive;font-size:42px;text-align:center;text-shadow:0 0 20px #ff4400;"><div>🚀<br>APPROACHING MARS…</div></div>
 
 <!-- SHOP BUTTON -->
 <button id="shop-btn" class="game-btn" style="display:none;">SHOP</button>
@@ -445,16 +626,27 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-// Save/load
+// Save/load — PROTOTYPE uses its own key so it does not touch the live save.
+// First-run: import progress from the live 'rocketSave' so the player keeps coins + upgrades.
+const PROTO_SAVE_KEY = 'rocketSave';
 function saveGame() {
-  localStorage.setItem('rocketSave', JSON.stringify({ coins, upgrades, bestHeight }));
+  localStorage.setItem(PROTO_SAVE_KEY, JSON.stringify({
+    coins, upgrades, bestHeight, currentLevel, equippedSkin, unlockedSkins
+  }));
 }
 function loadGame() {
   try {
-    const d = JSON.parse(localStorage.getItem('rocketSave'));
+    let d = JSON.parse(localStorage.getItem(PROTO_SAVE_KEY));
+    if (!d) {
+      d = JSON.parse(localStorage.getItem('rocketProtoSave'));
+    }
     if (d) {
       coins = d.coins || 0;
       bestHeight = d.bestHeight || 0;
+      currentLevel = d.currentLevel || 1;
+      equippedSkin = d.equippedSkin || 'gray';
+      unlockedSkins = d.unlockedSkins || ['gray'];
+      if (!unlockedSkins.includes('gray')) unlockedSkins.push('gray');
       if (d.upgrades) {
         for (const k in d.upgrades) {
           if (upgrades[k] !== undefined) upgrades[k] = d.upgrades[k];
@@ -466,6 +658,45 @@ function loadGame() {
 
 let coins = 0;
 let bestHeight = 0;
+let currentLevel = 1; // 1 = Earth, 2 = Moon
+const MAX_UPGRADE = 20; // default cap on every upgrade
+const LEVEL_1_MAX = 10; // unlock Fly to Moon when every upgrade hits this
+
+// === ROCKET SKINS ===
+let equippedSkin = 'gray';
+let unlockedSkins = ['gray']; // gray always unlocked
+
+const skinData = {
+  gray: {
+    name: 'STOCK GRAY',
+    desc: 'The boring default. No bonuses.',
+    bonusCaps: {}, // no overrides — all upgrades cap at MAX_UPGRADE (20)
+    unlock: 'Default rocket'
+  },
+  stealth: {
+    name: 'STEALTH BLACK',
+    desc: 'Booster + Armor cap raised to 30',
+    bonusCaps: { booster: 30, armor: 30 },
+    unlock: 'Reach 3,000m on Earth'
+  },
+  lava: {
+    name: 'LAVA ROCKET',
+    desc: 'Thrust + Fuel cap raised to 30',
+    bonusCaps: { thrust: 30, fuel: 30 },
+    unlock: 'Fly to the Moon'
+  },
+  mars: {
+    name: 'MARS EXPLORER',
+    desc: 'Aero + Coin Magnet cap raised to 30',
+    bonusCaps: { aero: 30, coinMagnet: 30 },
+    unlock: 'Fly to Mars'
+  }
+};
+
+function capFor(key) {
+  const skin = skinData[equippedSkin];
+  return (skin && skin.bonusCaps[key]) || MAX_UPGRADE;
+}
 
 let upgrades = {
   thrust: 0,     // more launch power
@@ -508,6 +739,9 @@ let stars = [];
 let clouds = [];
 let coinPickups = [];
 let debris = [];
+let meteors = [];
+let meteorSpawnTimer = 0;
+let meteorHitFlash = false;
 let flightCoins = 0;
 let shakeTimer = 0;
 
@@ -531,24 +765,33 @@ genClouds();
 
 // ============ ROBLOX-STYLE DRAWING ============
 
+// Color palettes per skin
+const skinColors = {
+  gray:    { body:'#999999', stripe:'#777777', nose:'#bbbbbb', tip:'#dddddd', window:'#666688', windowGlow:'#8888aa', fin:'#777777', flameOuter:'#ff6600', flameInner:'#ffdd00', flameCore:'#ffffff' },
+  stealth: { body:'#1a1a1a', stripe:'#000000', nose:'#222222', tip:'#00ff88', window:'#00ff88', windowGlow:'#88ffaa', fin:'#0a0a0a', flameOuter:'#00ff66', flameInner:'#88ff99', flameCore:'#ffffff' },
+  lava:    { body:'#cc3300', stripe:'#ffaa00', nose:'#ff5500', tip:'#ffdd44', window:'#ffdd00', windowGlow:'#ffffaa', fin:'#aa1100', flameOuter:'#ffaa00', flameInner:'#ffffff', flameCore:'#ffffff' },
+  mars:    { body:'#dd2222', stripe:'#ffffff', nose:'#ee4444', tip:'#ffd700', window:'#ffaa44', windowGlow:'#ffddaa', fin:'#aa1111', flameOuter:'#ff4400', flameInner:'#ffaa44', flameCore:'#ffffff' }
+};
+
 // Draw a blocky "Roblox-style" rocket
 function drawRocket(x, y, scale, angle) {
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(angle);
   const s = scale;
+  const c = skinColors[equippedSkin] || skinColors.gray;
 
   // Flame when flying
   if (phase === 'flying' && rocket.fuel > 0) {
     const flicker = Math.random() * 8;
     // Outer flame
-    ctx.fillStyle = '#ff6600';
+    ctx.fillStyle = c.flameOuter;
     ctx.fillRect(-8 * s, 20 * s, 16 * s, (25 + flicker) * s);
     // Inner flame
-    ctx.fillStyle = '#ffdd00';
+    ctx.fillStyle = c.flameInner;
     ctx.fillRect(-5 * s, 20 * s, 10 * s, (18 + flicker) * s);
     // Core
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = c.flameCore;
     ctx.fillRect(-2 * s, 20 * s, 4 * s, (12 + flicker) * s);
   }
 
@@ -560,15 +803,29 @@ function drawRocket(x, y, scale, angle) {
   }
 
   // Body (blocky rectangle)
-  ctx.fillStyle = '#ee3333';
+  ctx.fillStyle = c.body;
   ctx.fillRect(-12 * s, -20 * s, 24 * s, 40 * s);
 
   // Body stripe
-  ctx.fillStyle = '#cc2222';
+  ctx.fillStyle = c.stripe;
   ctx.fillRect(-12 * s, -5 * s, 24 * s, 8 * s);
 
+  // Skin-specific body details
+  if (equippedSkin === 'lava') {
+    // Lava drips
+    ctx.fillStyle = '#ffdd00';
+    ctx.fillRect(-10 * s, 8 * s, 3 * s, 10 * s);
+    ctx.fillRect(2 * s, 12 * s, 3 * s, 8 * s);
+    ctx.fillRect(7 * s, 4 * s, 3 * s, 12 * s);
+  } else if (equippedSkin === 'stealth') {
+    // Subtle green outline accents
+    ctx.fillStyle = '#00ff88';
+    ctx.fillRect(-12 * s, -20 * s, 24 * s, 1.5 * s);
+    ctx.fillRect(-12 * s, 18 * s, 24 * s, 1.5 * s);
+  }
+
   // Nose cone (blocky triangle via trapezoid)
-  ctx.fillStyle = '#ff5555';
+  ctx.fillStyle = c.nose;
   ctx.beginPath();
   ctx.moveTo(-12 * s, -20 * s);
   ctx.lineTo(12 * s, -20 * s);
@@ -577,21 +834,21 @@ function drawRocket(x, y, scale, angle) {
   ctx.fill();
 
   // Tip
-  ctx.fillStyle = '#ffd700';
+  ctx.fillStyle = c.tip;
   ctx.beginPath();
   ctx.moveTo(-4 * s, -38 * s);
   ctx.lineTo(4 * s, -38 * s);
   ctx.lineTo(0, -46 * s);
   ctx.fill();
 
-  // Window (blocky circle = rounded rect)
-  ctx.fillStyle = '#55ccff';
+  // Window
+  ctx.fillStyle = c.window;
   ctx.fillRect(-6 * s, -16 * s, 12 * s, 12 * s);
-  ctx.fillStyle = '#88eeff';
+  ctx.fillStyle = c.windowGlow;
   ctx.fillRect(-4 * s, -14 * s, 5 * s, 5 * s);
 
   // Fins
-  ctx.fillStyle = '#cc2222';
+  ctx.fillStyle = c.fin;
   // Left fin
   ctx.beginPath();
   ctx.moveTo(-12 * s, 10 * s);
@@ -630,6 +887,72 @@ function drawGround(offsetY) {
   const groundY = H * 0.75 - offsetY;
   if (groundY > H + 50) return;
 
+  if (currentLevel === 3) {
+    // === MARS SURFACE ===
+    ctx.fillStyle = '#cc5533';
+    ctx.fillRect(0, groundY, W, H - groundY + 100);
+    ctx.fillStyle = '#7a2211';
+    ctx.fillRect(0, groundY + 30, W, H);
+    ctx.fillStyle = '#aa4422';
+    for (let bx = 0; bx < W; bx += 55) {
+      ctx.beginPath();
+      ctx.arc(bx + 27, groundY + 4, 11, Math.PI, 0);
+      ctx.fill();
+    }
+    ctx.strokeStyle = '#551100';
+    ctx.lineWidth = 2;
+    for (let bx = 0; bx < W; bx += 40) {
+      ctx.beginPath();
+      ctx.moveTo(bx, groundY);
+      ctx.lineTo(bx, Math.min(groundY + 30, H));
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#888';
+    ctx.fillRect(W / 2 - 40, groundY - 6, 80, 8);
+    ctx.fillStyle = '#ffaa44';
+    ctx.fillRect(W / 2 - 30, groundY - 6, 6, 8);
+    ctx.fillRect(W / 2 + 24, groundY - 6, 6, 8);
+    return;
+  }
+
+  if (currentLevel === 2) {
+    // === MOON SURFACE ===
+    // Light grey moon dust
+    ctx.fillStyle = '#bbbbc8';
+    ctx.fillRect(0, groundY, W, H - groundY + 100);
+
+    // Darker subsurface
+    ctx.fillStyle = '#7a7a8a';
+    ctx.fillRect(0, groundY + 30, W, H);
+
+    // Crater bumps along the surface
+    ctx.fillStyle = '#9999a8';
+    for (let bx = 0; bx < W; bx += 60) {
+      ctx.beginPath();
+      ctx.arc(bx + 30, groundY + 4, 10, Math.PI, 0);
+      ctx.fill();
+    }
+
+    // Block lines
+    ctx.strokeStyle = '#555566';
+    ctx.lineWidth = 2;
+    for (let bx = 0; bx < W; bx += 40) {
+      ctx.beginPath();
+      ctx.moveTo(bx, groundY);
+      ctx.lineTo(bx, Math.min(groundY + 30, H));
+      ctx.stroke();
+    }
+
+    // Launch pad (silver on moon)
+    ctx.fillStyle = '#888';
+    ctx.fillRect(W / 2 - 40, groundY - 6, 80, 8);
+    ctx.fillStyle = '#ddddff';
+    ctx.fillRect(W / 2 - 30, groundY - 6, 6, 8);
+    ctx.fillRect(W / 2 + 24, groundY - 6, 6, 8);
+    return;
+  }
+
+  // === EARTH (level 1) ===
   // Grass
   ctx.fillStyle = '#44bb44';
   ctx.fillRect(0, groundY, W, H - groundY + 100);
@@ -658,6 +981,56 @@ function drawGround(offsetY) {
 
 // Sky gradient based on height
 function drawSky(height) {
+  if (currentLevel === 3) {
+    // Mars: rusty red sky fading to black
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, '#1a0000');
+    grad.addColorStop(0.7, '#552211');
+    grad.addColorStop(1, '#aa4422');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+    // Phobos moon
+    ctx.fillStyle = '#888877';
+    ctx.beginPath();
+    ctx.arc(W - 60, 70, 14, 0, Math.PI * 2);
+    ctx.fill();
+    // Deimos
+    ctx.fillStyle = '#aa9988';
+    ctx.beginPath();
+    ctx.arc(60, 120, 8, 0, Math.PI * 2);
+    ctx.fill();
+    return;
+  }
+
+  if (currentLevel === 2) {
+    // Moon: always near-black space, faint horizon glow
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, '#000005');
+    grad.addColorStop(0.85, '#0a0a20');
+    grad.addColorStop(1, '#1a1a35');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Distant Earth in the sky (top right)
+    const earthX = W - 70;
+    const earthY = 80;
+    ctx.fillStyle = '#3366cc';
+    ctx.beginPath();
+    ctx.arc(earthX, earthY, 26, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#44aa44';
+    ctx.beginPath();
+    ctx.arc(earthX - 8, earthY - 4, 8, 0, Math.PI * 2);
+    ctx.arc(earthX + 6, earthY + 6, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#88ccff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(earthX, earthY, 26, 0, Math.PI * 2);
+    ctx.stroke();
+    return;
+  }
+
   const t = Math.min(height / 3000, 1);
   const r1 = Math.floor(70 * (1 - t) + 5 * t);
   const g1 = Math.floor(130 * (1 - t) + 5 * t);
@@ -675,7 +1048,7 @@ function drawSky(height) {
 
 // Stars
 function drawStars(height, dt) {
-  const alpha = Math.min(height / 2000, 1) * 0.9;
+  const alpha = (currentLevel === 2 || currentLevel === 3) ? 0.95 : Math.min(height / 2000, 1) * 0.9;
   if (alpha < 0.05) return;
   ctx.fillStyle = `rgba(255,255,255,${alpha})`;
   stars.forEach(s => {
@@ -690,6 +1063,7 @@ function drawStars(height, dt) {
 
 // Clouds
 function drawClouds(offsetY) {
+  if (currentLevel === 2 || currentLevel === 3) return; // no clouds on moon/mars
   ctx.fillStyle = 'rgba(255,255,255,0.7)';
   clouds.forEach(c => {
     const cy = c.y - offsetY * 0.3;
@@ -773,6 +1147,128 @@ function spawnDebris() {
   }
 }
 
+// Meteors (moon level only) — fall from top of screen, fire trails
+function spawnMeteor(rocketY) {
+  const isMars = currentLevel === 3;
+  const size = isMars ? (28 + Math.random() * 20) : (16 + Math.random() * 14);
+  meteors.push({
+    x: 30 + Math.random() * (W - 60),
+    y: rocketY - H * 0.6 - 60 - Math.random() * 200,
+    vx: (Math.random() - 0.5) * (isMars ? 90 : 60),
+    vy: (isMars ? 320 : 220) + Math.random() * 140,
+    size,
+    hit: false
+  });
+}
+
+// === ALIENS (Mars only) ===
+let aliens = [];
+let plasma = [];
+let alienSpawnTimer = 0;
+function spawnAlien(rocketY) {
+  const fromLeft = Math.random() < 0.5;
+  aliens.push({
+    x: fromLeft ? -40 : W + 40,
+    y: rocketY - 100 - Math.random() * 300,
+    vx: (fromLeft ? 1 : -1) * (60 + Math.random() * 40),
+    fireTimer: 0.5 + Math.random(),
+    hit: false
+  });
+}
+function updateAliens(dt, rocketX, rocketY) {
+  aliens.forEach(a => {
+    a.x += a.vx * dt;
+    a.fireTimer -= dt;
+    if (a.fireTimer <= 0) {
+      a.fireTimer = 1.2 + Math.random();
+      const dx = rocketX - a.x, dy = rocketY - a.y;
+      const d = Math.hypot(dx, dy) || 1;
+      plasma.push({ x: a.x, y: a.y + 8, vx: dx/d * 260, vy: dy/d * 260, life: 3 });
+    }
+  });
+  aliens = aliens.filter(a => a.x > -100 && a.x < W + 100);
+  plasma.forEach(p => { p.x += p.vx*dt; p.y += p.vy*dt; p.life -= dt; });
+  plasma = plasma.filter(p => p.life > 0);
+}
+function drawAliens(offsetY) {
+  aliens.forEach(a => {
+    const sy = a.y - offsetY;
+    if (sy < -40 || sy > H + 40) return;
+    // UFO body
+    ctx.fillStyle = '#88ff88';
+    ctx.beginPath();
+    ctx.ellipse(a.x, sy, 22, 7, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle = '#aaffff';
+    ctx.beginPath();
+    ctx.arc(a.x, sy - 4, 9, Math.PI, 0);
+    ctx.fill();
+    ctx.fillStyle = '#225522';
+    ctx.fillRect(a.x - 14, sy + 4, 4, 3);
+    ctx.fillRect(a.x + 10, sy + 4, 4, 3);
+  });
+  plasma.forEach(p => {
+    const sy = p.y - offsetY;
+    ctx.fillStyle = '#00ff88';
+    ctx.beginPath();
+    ctx.arc(p.x, sy, 5, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(p.x, sy, 2, 0, Math.PI*2);
+    ctx.fill();
+  });
+}
+
+function updateMeteors(dt, rocketY) {
+  meteors.forEach(m => {
+    m.x += m.vx * dt;
+    m.y += m.vy * dt;
+    // Fire trail particles
+    if (Math.random() < 0.7) {
+      spawnParticle(
+        m.x + (Math.random() - 0.5) * m.size,
+        m.y - m.size * 0.4,
+        (Math.random() - 0.5) * 30,
+        -m.vy * 0.3 + (Math.random() - 0.5) * 40,
+        ['#ff5500', '#ffaa00', '#ffdd44'][Math.floor(Math.random() * 3)],
+        0.3 + Math.random() * 0.3
+      );
+    }
+  });
+  // Remove meteors that have flown off the bottom
+  meteors = meteors.filter(m => m.y < rocketY + H);
+}
+
+function drawMeteors(offsetY) {
+  meteors.forEach(m => {
+    if (m.hit) return;
+    const sy = m.y - offsetY;
+    if (sy < -60 || sy > H + 60) return;
+    // Glow halo
+    ctx.fillStyle = 'rgba(255,140,0,0.35)';
+    ctx.beginPath();
+    ctx.arc(m.x, sy, m.size * 1.6, 0, Math.PI * 2);
+    ctx.fill();
+    // Outer fire body
+    ctx.fillStyle = '#ff6600';
+    ctx.beginPath();
+    ctx.arc(m.x, sy, m.size * 0.95, 0, Math.PI * 2);
+    ctx.fill();
+    // Inner hot core
+    ctx.fillStyle = '#ffdd44';
+    ctx.beginPath();
+    ctx.arc(m.x - 2, sy - 2, m.size * 0.55, 0, Math.PI * 2);
+    ctx.fill();
+    // Rocky center
+    ctx.fillStyle = '#553322';
+    ctx.fillRect(m.x - m.size * 0.3, sy - m.size * 0.3, m.size * 0.6, m.size * 0.6);
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(m.x - m.size * 0.3, sy - m.size * 0.3, m.size * 0.6, m.size * 0.6);
+  });
+}
+
 function drawDebris(offsetY) {
   debris.forEach(d => {
     if (d.hit) return;
@@ -803,6 +1299,9 @@ function startCharge() {
   document.getElementById('power-label').style.display = 'block';
   document.getElementById('launch-btn').style.display = 'none';
   document.getElementById('shop-btn').style.display = 'none';
+  document.getElementById('moon-btn').style.display = 'none';
+  document.getElementById('mars-btn').style.display = 'none';
+  document.getElementById('rocket-shop-btn').style.display = 'none';
 }
 
 function releaseCharge() {
@@ -832,6 +1331,12 @@ function launchRocket(power) {
 
   spawnCoinPickups();
   spawnDebris();
+  meteors = [];
+  meteorSpawnTimer = 0;
+  meteorHitFlash = false;
+  aliens = [];
+  plasma = [];
+  alienSpawnTimer = 2;
 
   document.getElementById('hud').style.display = 'flex';
   document.getElementById('steer-controls').style.display = 'flex';
@@ -883,8 +1388,8 @@ function update(time) {
     rocket.angle += (targetAngle - rocket.angle) * 0.1;
     rocket.angle = Math.max(-0.5, Math.min(0.5, rocket.angle));
 
-    // Gravity
-    const gravity = 280;
+    // Gravity (moon ~ 1/6th feel)
+    const gravity = currentLevel === 2 ? 95 : (currentLevel === 3 ? 180 : 280);
     rocket.vy += gravity * dt;
 
     // Thrust
@@ -972,6 +1477,62 @@ function update(time) {
       }
     });
 
+    // === METEORS (moon + mars) ===
+    if (currentLevel === 2 || currentLevel === 3) {
+      meteorSpawnTimer -= dt;
+      if (meteorSpawnTimer <= 0) {
+        spawnMeteor(rocket.y);
+        meteorSpawnTimer = 0.6 + Math.random() * 0.7; // a meteor every ~0.6-1.3s
+      }
+      updateMeteors(dt, rocket.y);
+
+      // Collision with meteors → -20 coins, end flight
+      for (const m of meteors) {
+        if (m.hit) continue;
+        const dx = rocket.x - m.x;
+        const dy = rocket.y - m.y;
+        const r = m.size + 12;
+        if (dx * dx + dy * dy < r * r) {
+          m.hit = true;
+          meteorHitFlash = true;
+          shakeTimer = 0.6;
+          // Big orange explosion
+          for (let i = 0; i < 30; i++) {
+            spawnParticle(
+              m.x, m.y,
+              (Math.random() - 0.5) * 250,
+              (Math.random() - 0.5) * 250,
+              ['#ff5500', '#ffaa00', '#ffdd44', '#ffffff'][Math.floor(Math.random() * 4)],
+              0.5 + Math.random() * 0.4
+            );
+          }
+          endFlight(true);
+          break;
+        }
+      }
+    }
+
+    // === ALIENS (Mars only) ===
+    if (currentLevel === 3) {
+      alienSpawnTimer -= dt;
+      if (alienSpawnTimer <= 0) {
+        spawnAlien(rocket.y);
+        alienSpawnTimer = 1.5 + Math.random() * 1.5;
+      }
+      updateAliens(dt, rocket.x, rocket.y);
+      for (const p of plasma) {
+        const dx = rocket.x - p.x, dy = rocket.y - p.y;
+        if (dx*dx + dy*dy < 400) {
+          shakeTimer = 0.6;
+          for (let i = 0; i < 25; i++) {
+            spawnParticle(p.x, p.y, (Math.random()-0.5)*250, (Math.random()-0.5)*250, '#00ff88', 0.5);
+          }
+          endFlight(true);
+          break;
+        }
+      }
+    }
+
     // Height-based coins
     const heightCoins = Math.floor(rocket.height / 100);
 
@@ -1013,6 +1574,8 @@ function update(time) {
   drawClouds(offsetY);
   drawGround(offsetY);
   drawDebris(offsetY);
+  if (currentLevel === 2 || currentLevel === 3) drawMeteors(offsetY);
+  if (currentLevel === 3) drawAliens(offsetY);
   drawCoinPickups(offsetY, dt);
   drawParticles(offsetY);
 
@@ -1029,19 +1592,36 @@ function update(time) {
 }
 
 // ============ END FLIGHT ============
-function endFlight() {
+function endFlight(meteorHit) {
+  if (phase === 'results') return;
   phase = 'results';
   const heightScore = Math.floor(rocket.height);
   const heightBonus = Math.floor(heightScore / 50);
-  const totalCoins = flightCoins + heightBonus;
+  let totalCoins = flightCoins + heightBonus;
 
-  coins += totalCoins;
+  if (meteorHit) {
+    // Meteor penalty: lose 20 coins, no flight earnings, floor at 0
+    totalCoins = -20;
+    coins = Math.max(0, coins - 20);
+  } else {
+    coins += totalCoins;
+  }
   if (heightScore > bestHeight) bestHeight = heightScore;
   saveGame();
 
+  document.querySelector('#results h2').textContent = meteorHit ? '💥 METEOR HIT!' : 'FLIGHT COMPLETE!';
   document.getElementById('res-height').textContent = heightScore;
   document.getElementById('res-best').textContent = bestHeight;
-  document.getElementById('res-coins').textContent = totalCoins;
+  const coinEl = document.getElementById('res-coins');
+  if (meteorHit) {
+    coinEl.textContent = '−20';
+    coinEl.parentElement.style.color = '#ff5566';
+    coinEl.parentElement.firstChild.textContent = '';
+  } else {
+    coinEl.textContent = totalCoins;
+    coinEl.parentElement.style.color = '';
+    coinEl.parentElement.firstChild.textContent = '+ ';
+  }
   document.getElementById('results').style.display = 'flex';
   document.getElementById('hud').style.display = 'none';
   document.getElementById('steer-controls').style.display = 'none';
@@ -1054,15 +1634,17 @@ function renderShop() {
   upgradeData.forEach(ud => {
     const cost = getCost(ud);
     const level = upgrades[ud.key];
+    const cap = capFor(ud.key);
     const canAfford = coins >= cost;
-    const maxed = level >= 10;
+    const maxed = level >= cap;
+    const boosted = cap > MAX_UPGRADE;
 
     const div = document.createElement('div');
     div.className = 'shop-item' + (canAfford && !maxed ? ' affordable' : '');
     div.innerHTML = `
       <span class="item-icon">${ud.icon}</span>
-      <div class="item-name">${ud.name}</div>
-      <div class="item-level">Lv. ${level}${maxed ? ' MAX' : ' / 10'}</div>
+      <div class="item-name">${ud.name}${boosted ? ' ⭐' : ''}</div>
+      <div class="item-level">Lv. ${level}${maxed ? ' MAX' : ' / ' + cap}</div>
       ${maxed ? '<div class="item-cost">MAXED</div>' : `<div class="item-cost">${cost} coins</div>`}
       <div class="item-desc">${ud.desc}</div>
     `;
@@ -1074,6 +1656,7 @@ function renderShop() {
           saveGame();
           renderShop();
           updateCoinDisplay();
+          // moon button shows next time shop closes; no-op while shop open
         }
       });
     }
@@ -1085,6 +1668,172 @@ function updateCoinDisplay() {
   document.getElementById('coin-display').textContent = coins;
 }
 
+// === ROCKET SHOP ===
+function checkSkinUnlocks() {
+  let unlockedNew = false;
+  if (!unlockedSkins.includes('stealth') && bestHeight >= 3000) {
+    unlockedSkins.push('stealth');
+    unlockedNew = 'STEALTH BLACK';
+  }
+  if (!unlockedSkins.includes('lava') && currentLevel >= 2) {
+    unlockedSkins.push('lava');
+    unlockedNew = 'LAVA ROCKET';
+  }
+  if (!unlockedSkins.includes('mars') && currentLevel >= 3) {
+    unlockedSkins.push('mars');
+    unlockedNew = 'MARS EXPLORER';
+  }
+  if (unlockedNew) {
+    saveGame();
+    const badge = document.getElementById('proto-badge');
+    badge.style.display = 'block';
+    badge.textContent = '🚀 NEW ROCKET UNLOCKED: ' + unlockedNew;
+    setTimeout(() => { badge.style.display = 'none'; }, 2500);
+  }
+}
+
+// Draw a small preview of a skin into a mini canvas
+function drawSkinPreview(canvas, skinKey) {
+  const pctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  pctx.clearRect(0, 0, w, h);
+  const c = skinColors[skinKey];
+  const cx = w / 2, cy = h / 2;
+  const s = 1.0;
+  // body
+  pctx.fillStyle = c.body;
+  pctx.fillRect(cx - 12 * s, cy - 20 * s, 24 * s, 40 * s);
+  pctx.fillStyle = c.stripe;
+  pctx.fillRect(cx - 12 * s, cy - 5 * s, 24 * s, 8 * s);
+  // nose
+  pctx.fillStyle = c.nose;
+  pctx.beginPath();
+  pctx.moveTo(cx - 12 * s, cy - 20 * s);
+  pctx.lineTo(cx + 12 * s, cy - 20 * s);
+  pctx.lineTo(cx + 4 * s, cy - 38 * s);
+  pctx.lineTo(cx - 4 * s, cy - 38 * s);
+  pctx.fill();
+  pctx.fillStyle = c.tip;
+  pctx.beginPath();
+  pctx.moveTo(cx - 4 * s, cy - 38 * s);
+  pctx.lineTo(cx + 4 * s, cy - 38 * s);
+  pctx.lineTo(cx, cy - 46 * s);
+  pctx.fill();
+  // window
+  pctx.fillStyle = c.window;
+  pctx.fillRect(cx - 6 * s, cy - 16 * s, 12 * s, 12 * s);
+  pctx.fillStyle = c.windowGlow;
+  pctx.fillRect(cx - 4 * s, cy - 14 * s, 5 * s, 5 * s);
+  // fins
+  pctx.fillStyle = c.fin;
+  pctx.beginPath();
+  pctx.moveTo(cx - 12 * s, cy + 10 * s);
+  pctx.lineTo(cx - 12 * s, cy + 20 * s);
+  pctx.lineTo(cx - 20 * s, cy + 24 * s);
+  pctx.lineTo(cx - 16 * s, cy + 10 * s);
+  pctx.fill();
+  pctx.beginPath();
+  pctx.moveTo(cx + 12 * s, cy + 10 * s);
+  pctx.lineTo(cx + 12 * s, cy + 20 * s);
+  pctx.lineTo(cx + 20 * s, cy + 24 * s);
+  pctx.lineTo(cx + 16 * s, cy + 10 * s);
+  pctx.fill();
+}
+
+function renderRocketShop() {
+  checkSkinUnlocks();
+  const grid = document.getElementById('rocket-grid');
+  grid.innerHTML = '';
+  Object.keys(skinData).forEach(key => {
+    const skin = skinData[key];
+    const isUnlocked = unlockedSkins.includes(key);
+    const isEquipped = equippedSkin === key;
+    const card = document.createElement('div');
+    card.className = 'rocket-card ' + (isEquipped ? 'equipped' : (isUnlocked ? 'unlocked' : 'locked'));
+    const capList = Object.entries(skin.bonusCaps).map(([k,v]) => `${k.toUpperCase()} → ${v}`).join(' · ');
+    card.innerHTML = `
+      <canvas width="80" height="100"></canvas>
+      <div class="info">
+        <div class="name">${skin.name}${isUnlocked ? '' : ' 🔒'}</div>
+        <div class="desc">${skin.desc}</div>
+        ${capList ? `<div class="desc">⭐ ${capList}</div>` : ''}
+        ${isUnlocked ? '' : `<div class="unlock-text">Locked: ${skin.unlock}</div>`}
+      </div>
+      <button ${isUnlocked ? '' : 'disabled'} class="${isEquipped ? 'equipped-btn' : ''}">
+        ${isEquipped ? 'EQUIPPED' : (isUnlocked ? 'EQUIP' : 'LOCKED')}
+      </button>
+    `;
+    drawSkinPreview(card.querySelector('canvas'), key);
+    if (isUnlocked && !isEquipped) {
+      card.querySelector('button').addEventListener('click', () => {
+        equippedSkin = key;
+        saveGame();
+        renderRocketShop();
+      });
+    }
+    grid.appendChild(card);
+  });
+}
+
+// Show "Fly to Moon" only when on level 1 and every upgrade has hit LEVEL_1_MAX
+function refreshMoonButton() {
+  const allMaxed = upgradeData.every(ud => upgrades[ud.key] >= LEVEL_1_MAX);
+  const show = allMaxed && currentLevel === 1 && (phase === 'idle' || phase === 'results');
+  document.getElementById('moon-btn').style.display = show ? 'block' : 'none';
+}
+
+function flyToMoon() {
+  if (currentLevel !== 1) return;
+  document.getElementById('moon-btn').style.display = 'none';
+  document.getElementById('mars-btn').style.display = 'none';
+  document.getElementById('launch-btn').style.display = 'none';
+  document.getElementById('shop-btn').style.display = 'none';
+  document.getElementById('rocket-shop-btn').style.display = 'none';
+  const overlay = document.getElementById('moon-transition');
+  overlay.style.display = 'flex';
+  setTimeout(() => {
+    currentLevel = 2;
+    saveGame();
+    overlay.style.display = 'none';
+    phase = 'idle';
+    document.getElementById('launch-btn').style.display = 'block';
+    document.getElementById('shop-btn').style.display = 'block';
+    document.getElementById('rocket-shop-btn').style.display = 'block';
+    document.getElementById('hud').style.display = 'flex';
+    updateCoinDisplay();
+    checkSkinUnlocks(); // unlocks lava rocket
+  }, 2200);
+}
+
+// Mars button — show when on level 2 and all upgrades hit MAX_UPGRADE
+function refreshMarsButton() {
+  const allMaxed = upgradeData.every(ud => upgrades[ud.key] >= MAX_UPGRADE);
+  const show = allMaxed && currentLevel === 2 && (phase === 'idle' || phase === 'results');
+  document.getElementById('mars-btn').style.display = show ? 'block' : 'none';
+}
+
+function flyToMars() {
+  if (currentLevel !== 2) return;
+  document.getElementById('mars-btn').style.display = 'none';
+  document.getElementById('launch-btn').style.display = 'none';
+  document.getElementById('shop-btn').style.display = 'none';
+  document.getElementById('rocket-shop-btn').style.display = 'none';
+  const overlay = document.getElementById('mars-transition');
+  overlay.style.display = 'flex';
+  setTimeout(() => {
+    currentLevel = 3;
+    saveGame();
+    overlay.style.display = 'none';
+    phase = 'idle';
+    document.getElementById('launch-btn').style.display = 'block';
+    document.getElementById('shop-btn').style.display = 'block';
+    document.getElementById('rocket-shop-btn').style.display = 'block';
+    document.getElementById('hud').style.display = 'flex';
+    updateCoinDisplay();
+    checkSkinUnlocks();
+  }, 2200);
+}
+
 // ============ EVENT HANDLERS ============
 
 // Title screen
@@ -1093,8 +1842,73 @@ document.getElementById('play-btn').addEventListener('click', () => {
   phase = 'idle';
   document.getElementById('launch-btn').style.display = 'block';
   document.getElementById('shop-btn').style.display = 'block';
+  document.getElementById('rocket-shop-btn').style.display = 'block';
   document.getElementById('hud').style.display = 'flex';
   updateCoinDisplay();
+  refreshMoonButton();
+  refreshMarsButton();
+  checkSkinUnlocks();
+});
+
+// Fly to Moon
+document.getElementById('moon-btn').addEventListener('click', flyToMoon);
+document.getElementById('mars-btn').addEventListener('click', flyToMars);
+
+// Rocket Shop open/close
+document.getElementById('rocket-shop-btn').addEventListener('click', () => {
+  renderRocketShop();
+  document.getElementById('rocket-shop').style.display = 'block';
+  document.getElementById('launch-btn').style.display = 'none';
+  document.getElementById('shop-btn').style.display = 'none';
+  document.getElementById('rocket-shop-btn').style.display = 'none';
+  document.getElementById('moon-btn').style.display = 'none';
+  document.getElementById('mars-btn').style.display = 'none';
+});
+document.getElementById('close-rocket-shop').addEventListener('click', () => {
+  document.getElementById('rocket-shop').style.display = 'none';
+  document.getElementById('launch-btn').style.display = 'block';
+  document.getElementById('shop-btn').style.display = 'block';
+  document.getElementById('rocket-shop-btn').style.display = 'block';
+  refreshMoonButton();
+  refreshMarsButton();
+});
+
+// CHEAT CODES:
+//   "123"  → max all upgrades to level 10 + 500 coins
+//   "4321" → max all upgrades to level 20 + 2000 coins (Mars unlock)
+let cheatBuffer = '';
+function flashBadge(text) {
+  const badge = document.getElementById('proto-badge');
+  badge.style.display = 'block';
+  badge.textContent = text;
+  setTimeout(() => { badge.style.display = 'none'; }, 1800);
+}
+window.addEventListener('keydown', (e) => {
+  cheatBuffer = (cheatBuffer + e.key).slice(-4);
+  if (cheatBuffer.endsWith('4321')) {
+    upgradeData.forEach(ud => { if (upgrades[ud.key] < 20) upgrades[ud.key] = 20; });
+    coins += 2000;
+    saveGame();
+    updateCoinDisplay();
+    refreshMoonButton();
+  refreshMarsButton();
+    refreshMarsButton();
+    if (document.getElementById('shop').style.display === 'block') renderShop();
+    flashBadge('🔥 ALL UPGRADES → LV 20 🔥');
+    cheatBuffer = '';
+    return;
+  }
+  if (cheatBuffer.endsWith('123')) {
+    upgradeData.forEach(ud => { if (upgrades[ud.key] < 10) upgrades[ud.key] = 10; });
+    coins += 500;
+    saveGame();
+    updateCoinDisplay();
+    refreshMoonButton();
+  refreshMarsButton();
+    if (document.getElementById('shop').style.display === 'block') renderShop();
+    flashBadge('✨ ALL UPGRADES → LV 10 ✨');
+    cheatBuffer = '';
+  }
 });
 
 // Launch button — start charging
@@ -1111,12 +1925,18 @@ document.getElementById('shop-btn').addEventListener('click', () => {
   document.getElementById('shop').style.display = 'block';
   document.getElementById('launch-btn').style.display = 'none';
   document.getElementById('shop-btn').style.display = 'none';
+  document.getElementById('moon-btn').style.display = 'none';
+  document.getElementById('mars-btn').style.display = 'none';
+  document.getElementById('rocket-shop-btn').style.display = 'none';
 });
 
 document.getElementById('close-shop').addEventListener('click', () => {
   document.getElementById('shop').style.display = 'none';
   document.getElementById('launch-btn').style.display = 'block';
   document.getElementById('shop-btn').style.display = 'block';
+  document.getElementById('rocket-shop-btn').style.display = 'block';
+  refreshMoonButton();
+  refreshMarsButton();
 });
 
 // Mobile steering buttons
@@ -1143,8 +1963,12 @@ document.getElementById('ok-btn').addEventListener('click', () => {
   particles = [];
   document.getElementById('launch-btn').style.display = 'block';
   document.getElementById('shop-btn').style.display = 'block';
+  document.getElementById('rocket-shop-btn').style.display = 'block';
   document.getElementById('hud').style.display = 'flex';
   updateCoinDisplay();
+  refreshMoonButton();
+  refreshMarsButton();
+  checkSkinUnlocks(); // unlocks stealth if 3000m hit
 });
 
 // ============ INIT ============
