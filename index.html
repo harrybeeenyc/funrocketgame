@@ -200,7 +200,6 @@
     box-shadow: 0 4px 0 #883311;
     padding: 12px 14px;
     font-size: 14px;
-    display: none;
   }
 
   /* Cheat code button */
@@ -1346,8 +1345,8 @@ function releaseCharge() {
 // ============ LAUNCH ============
 function launchRocket(power) {
   phase = 'flying';
-  const basePower = 600 + upgrades.thrust * 120;
-  const baseFuel = 1.5 + upgrades.fuel * 0.5;
+  const basePower = 750 + upgrades.thrust * 120;
+  const baseFuel = 2.2 + upgrades.fuel * 0.5;
 
   rocket.x = W / 2;
   rocket.y = H * 0.75 - 30;
@@ -1420,13 +1419,13 @@ function update(time) {
     rocket.angle = Math.max(-0.5, Math.min(0.5, rocket.angle));
 
     // Gravity (moon ~ 1/6th feel)
-    const gravity = currentLevel === 2 ? 95 : (currentLevel === 3 ? 180 : 280);
+    const gravity = currentLevel === 2 ? 95 : (currentLevel === 3 ? 180 : 200);
     rocket.vy += gravity * dt;
 
     // Thrust
     if (rocket.fuel > 0) {
       rocket.fuel -= dt;
-      rocket.vy -= (400 + upgrades.thrust * 40) * dt;
+      rocket.vy -= (480 + upgrades.thrust * 40) * dt;
 
       // Exhaust particles
       if (Math.random() < 0.6) {
